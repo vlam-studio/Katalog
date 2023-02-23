@@ -10,6 +10,8 @@
 		"astro": "astro"
 	},
 	"dependencies": {
-		"astro": "^2.0.14"
+		"@storyblok/astro": "^2.0.8",
+		"astro": "^2.0.14",
+		"vite": "^4.1.4"
 	}
 }
