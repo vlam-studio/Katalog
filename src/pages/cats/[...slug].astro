@@ -1,0 +1,21 @@
+---
+import { CollectionEntry, getCollection } from 'astro:content';
+import CatPost from '../../layouts/CatPost.astro';
+
+export async function getStaticPaths() {
+	const cats = await getCollection('cats');
+	return cats.map((cat) => ({
+		params: { slug: cat.slug },
+		props: cat,
+	}));
+}
+type Props = CollectionEntry<'cats'>;
+
+const cat = Astro.props;
+const { Content } = await cat.render();
+---
+
+<CatPost {...cat.data}>
+	<h1>{cat.data.title}</h1>
+	<Content />
+</CatPost>
