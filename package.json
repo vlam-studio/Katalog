@@ -10,6 +10,8 @@
 		"astro": "astro"
 	},
 	"dependencies": {
+		"@astrojs/mdx": "^0.17.2",
+		"@astrojs/sitemap": "^1.1.0",
 		"@storyblok/astro": "^2.0.8",
 		"astro": "^2.0.14",
 		"vite": "^4.1.4"
