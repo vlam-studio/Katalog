@@ -1,11 +1,12 @@
 ---
 const { cat } = Astro.props;
+console.log(cat)
 ---
 <div>
-    <a href={`/cats/${cat.slug}/`}>
+    <a href={`/${cat.slug}/`}>
         <article class="card">
-            {cat.data.heroImage && <img width={720} height={360} src={cat.data.heroImage} alt="" />}
-            <h1>{cat.data.title}</h1>
+            {cat.image && <img width={720} height={360} src={cat.image} alt="" />}
+            <h1>{cat.name}</h1>
         </article>
         </a>
 </div>

@@ -1,5 +1,5 @@
 {
-	"name": "katalog",
+	"name": "catalog",
 	"type": "module",
 	"version": "0.0.1",
 	"scripts": {
@@ -10,10 +10,7 @@
 		"astro": "astro"
 	},
 	"dependencies": {
-		"@astrojs/mdx": "^0.17.2",
-		"@astrojs/sitemap": "^1.1.0",
-		"@storyblok/astro": "^2.0.8",
-		"astro": "^2.0.14",
-		"vite": "^4.1.4"
+		"@storyblok/astro": "^2.0.9",
+		"astro": "^2.0.16"
 	}
 }

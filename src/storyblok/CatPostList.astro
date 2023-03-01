@@ -1,0 +1,36 @@
+---
+import { storyblokEditable } from '@storyblok/astro'
+import { useStoryblokApi } from '@storyblok/astro'
+import CatCard from '../components/CatCard.astro';
+
+const storyblokApi = useStoryblokApi();
+
+const { data } = await storyblokApi.get('cdn/stories', {
+  version: import.meta.env.DEV ? "draft" : "published",
+  content_type: 'catPost',
+})
+
+const cats = data.stories.map(story => {
+  return {
+    name : story.content.name,
+    title: story.content.title,
+    content: story.content.content,
+    image: story.content.image,
+    date: new Date(story.published_at).toLocaleDateString("en-US", {dateStyle: "full"}),
+    description: story.content.description,
+    slug: story.full_slug,
+  }
+})
+
+const { blok } = Astro.props
+---
+
+<div class="row">
+  {
+    cats.map((cat) => (
+        <div class="column">
+        <CatCard cat={cat}/>
+        </div>
+    ))
+  }
+</div>

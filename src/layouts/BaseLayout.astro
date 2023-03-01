@@ -1,12 +1,12 @@
 ---
 import BaseHead from "../components/BaseHead.astro";
 import Header from "../components/Header.astro";
-const {title} = Astro.props;
+const {title, description} = Astro.props;
 ---
 
 <html lang="en">
 	<head>
-		<BaseHead title={title}/>
+		<BaseHead title={title} description={description}/>
 		<Header></Header>
 	</head>
 	<body>

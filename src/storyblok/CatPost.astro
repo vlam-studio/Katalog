@@ -1,0 +1,19 @@
+---
+import { storyblokEditable, renderRichText } from '@storyblok/astro'
+import BaseLayout from '../layouts/BaseLayout.astro';
+
+const { blok } = Astro.props
+const content = renderRichText(blok.content)
+---
+
+<BaseLayout>
+  <article {...storyblokEditable(blok)}>
+    {blok.image && <img width={720} height={360} src={blok.image} alt="" />}
+    <h1>{blok.name}</h1>
+    <h1>{blok.date}</h1>
+    <hr />
+    <p>{blok.description}</p>
+    <Fragment set:html={content} />
+  </article>
+</BaseLayout>
+

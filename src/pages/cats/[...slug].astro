@@ -1,21 +1,38 @@
 ---
-import { CollectionEntry, getCollection } from 'astro:content';
-import CatPost from '../../layouts/CatPost.astro';
+import { useStoryblokApi } from '@storyblok/astro'
+import StoryblokComponent from '@storyblok/astro/StoryblokComponent.astro'
 
 export async function getStaticPaths() {
-	const cats = await getCollection('cats');
-	return cats.map((cat) => ({
-		params: { slug: cat.slug },
-		props: cat,
-	}));
-}
-type Props = CollectionEntry<'cats'>;
+  const sbApi = useStoryblokApi();
 
-const cat = Astro.props;
-const { Content } = await cat.render();
+  const { data } = await sbApi.get("cdn/stories", {
+    content_type: "catPost",
+    version: import.meta.env.DEV ? "draft" : "published",
+  });
+
+  const stories = Object.values(data.stories);
+
+  return stories.map((story) => {
+    return {
+      params: { slug: story.slug },
+    };
+  });
+}
+
+const sbApi = useStoryblokApi();
+const { slug } = Astro.params;
+const { data } = await sbApi.get(`cdn/stories/cats/${slug}`, {
+  version: import.meta.env.DEV ? "draft" : "published",
+});
+
+const story = data.story;
 ---
 
-<CatPost {...cat.data}>
-	<h1>{cat.data.title}</h1>
-	<Content />
-</CatPost>
+<html lang="en">
+  <head>
+    <title>Storyblok & Astro</title>
+  </head>
+  <body>
+    <StoryblokComponent blok={story.content} />
+  </body>
+</html>
